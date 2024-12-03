@@ -1,14 +1,23 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: aliceblue;
 }
 
+#root .map {
+  max-width: 80% !important;
+  height: 100%;
+  margin: 0 auto;
+}
 
-.wrapper{
-  width: 1000px;
-
-
+.tales{
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  flex-wrap: wrap;
+  text-align: left;
+}
+.tales h1, h2{
+  text-align: center;
 }
