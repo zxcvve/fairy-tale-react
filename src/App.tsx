@@ -4,11 +4,13 @@ import Tale2 from "./components/tales/Tale2";
 import Tale3 from "./components/tales/Tale3";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
-const allowedRegions = ["sakha"];
-const screenDimensions = {
-  screenWidth: window.innerWidth,
-  screenHeight: window.innerHeight,
+// key is region rsmKey, value is id of the tale div
+const regionTales = {
+  "geo-61": "tale-region1",
+  "geo-52": "tale-region2",
+  "geo-60": "tale-region3",
 };
+
 function App() {
   return (
     <>
@@ -47,11 +49,13 @@ function App() {
                     },
                   }}
                   onClick={() => {
-                    alert("You clicked on " + geo.properties.name);
-                    const regionId = geo.properties.id?.toLowerCase();
-                    if (allowedRegions.includes(regionId)) {
+                    console.log("You clicked on " + geo.properties.name);
+                    if (
+                      Object.keys(regionTales).includes(geo.rsmKey) &&
+                      Object.keys(regionTales).includes(geo.rsmKey)
+                    ) {
                       const element = document.getElementById(
-                        `tale-${regionId}`
+                        regionTales[geo.rsmKey]
                       );
                       if (element) {
                         element.scrollIntoView({ behavior: "smooth" });
@@ -65,9 +69,15 @@ function App() {
         </ComposableMap>
       </div>
       <div className="tales">
-        <Tale1 />
-        <Tale2 />
-        <Tale3 />
+        <div id="tale-region1">
+          <Tale1 />
+        </div>
+        <div id="tale-region2">
+          <Tale2 />
+        </div>
+        <div id="tale-region3">
+          <Tale3 />
+        </div>
       </div>
     </>
   );
