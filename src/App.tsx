@@ -1,8 +1,8 @@
 import "./App.css";
-import Russia from "@react-map/russia";
 import Tale1 from "./components/tales/Tale1";
 import Tale2 from "./components/tales/Tale2";
 import Tale3 from "./components/tales/Tale3";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 const allowedRegions = ["sakha"];
 const screenDimensions = {
@@ -13,28 +13,61 @@ function App() {
   return (
     <>
       <div className="map">
-        <Russia
-          type="select-single"
-          hints={true}
-          size={screenDimensions.screenWidth - 300}
-          onSelect={(state) => {
-            const lowerCaseState = (state as string).toLowerCase();
-            if (
-              lowerCaseState != null &&
-              allowedRegions.includes(lowerCaseState)
-            ) {
-              const element = document.getElementById(`tale-${lowerCaseState}`);
-              if (element) {
-                element.scrollIntoView({ behavior: "smooth" });
-              }
-            }
+        <ComposableMap
+          projection="geoMercator"
+          height={500}
+          projectionConfig={{
+            scale: 200,
+            center: [110, 60], // Центр России примерно [90°E, 60°N]
           }}
-        />
-        <div className="tales">
-          <Tale1 />
-          <Tale2 />
-          <Tale3 />
-        </div>
+        >
+          <Geographies geography="russia.geojson">
+            {({ geographies }) =>
+              geographies.map((geo) => (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  style={{
+                    default: {
+                      fill: "#E5E5E5",
+                      stroke: "#000000",
+                      outline: "none",
+                    },
+                    hover: {
+                      fill: "#A5A5A5",
+                      stroke: "#000000",
+                      strokeWidth: 0.5,
+                      outline: "none",
+                    },
+                    pressed: {
+                      fill: "#808080",
+                      stroke: "#000000",
+                      strokeWidth: 0.5,
+                      outline: "none",
+                    },
+                  }}
+                  onClick={() => {
+                    alert("You clicked on " + geo.properties.name);
+                    const regionId = geo.properties.id?.toLowerCase();
+                    if (allowedRegions.includes(regionId)) {
+                      const element = document.getElementById(
+                        `tale-${regionId}`
+                      );
+                      if (element) {
+                        element.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }
+                  }}
+                />
+              ))
+            }
+          </Geographies>
+        </ComposableMap>
+      </div>
+      <div className="tales">
+        <Tale1 />
+        <Tale2 />
+        <Tale3 />
       </div>
     </>
   );

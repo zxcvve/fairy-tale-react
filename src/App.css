@@ -6,16 +6,39 @@
 }
 
 #root .map {
-  max-width: 80% !important;
-  height: 100%;
-  margin: 0 auto;
+  max-width: 100% !important;
+  height: 600px;
+}
+
+@media (max-width: 1350px) {
+  #root .map {
+    height: 500px;
+  }
+}
+
+@media (max-width: 1024px) {
+  #root .map {
+    height: 400px;
+  }
+}
+@media (max-width: 768px) {
+  #root .map {
+    height: 300px;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  #root .map {
+    height: 100px;
+  }
 }
 
 .tales{
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   text-align: left;
 }
 .tales h1, h2{
