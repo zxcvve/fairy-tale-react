@@ -2,19 +2,11 @@ import "./App.css";
 import Tale1 from "./components/tales/Tale1";
 import Tale2 from "./components/tales/Tale2";
 import Tale3 from "./components/tales/Tale3";
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-
-// key is region rsmKey, value is id of the tale div
-const regionTales = {
-  "geo-61": "tale-region1",
-  "geo-52": "tale-region2",
-  "geo-60": "tale-region3",
-};
 
 function App() {
   return (
     <>
-      <div className="map">
+      {/* <div className="map">
         <ComposableMap
           projection="geoMercator"
           height={500}
@@ -67,7 +59,7 @@ function App() {
             }
           </Geographies>
         </ComposableMap>
-      </div>
+      </div> */}
       <div className="tales">
         <div id="tale-region1">
           <Tale1 />
