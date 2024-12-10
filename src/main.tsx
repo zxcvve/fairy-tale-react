@@ -4,9 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import "./index.css";
 import App from "./App.tsx";
 
+const basename =
+  process.env.NODE_ENV === "production" ? "/fairy-tale-react/" : "";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Routes>
         <Route path="/" element={<App />} />
       </Routes>
