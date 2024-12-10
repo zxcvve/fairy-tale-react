@@ -55,7 +55,7 @@ function App() {
                       Object.keys(regionTales).includes(geo.rsmKey)
                     ) {
                       const element = document.getElementById(
-                        regionTales[geo.rsmKey]
+                        regionTales[geo.rsmKey as keyof typeof regionTales]
                       );
                       if (element) {
                         element.scrollIntoView({ behavior: "smooth" });
